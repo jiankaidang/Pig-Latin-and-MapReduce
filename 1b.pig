@@ -17,4 +17,4 @@ tweets_include_favorite_ordered_by_id = ORDER tweets_include_favorite BY id;
 
 -- Use the default Pig output function to store the results.
 -- Output: (id, content, user)
-STORE tweets_include_favorite_ordered_by_id INTO '1b.result';
+STORE tweets_include_favorite_ordered_by_id INTO '1b.result' USING PigStorage (',');
