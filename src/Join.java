@@ -57,20 +57,16 @@ public class Join {
     }
 
     public static class Reduce extends Reducer<Text, Text, Text, Text> {
-        private String userLogin = null;
         private String userInfo = null;
 
         public void reduce(Text key, Iterable<Text> values, Context context)
                 throws IOException, InterruptedException {
             String keyStr = key.toString();
             if (keyStr.endsWith(",0")) {
-                userLogin = keyStr.split(",")[0];
                 userInfo = values.iterator().next().toString();
             } else {
                 for (Text val : values) {
-                    if (userLogin.equals(keyStr.split(",")[0])) {
-                        context.write(new Text(userLogin), new Text(userInfo + "\t" + val.toString()));
-                    }
+                    context.write(new Text(keyStr.split(",")[0]), new Text(userInfo + "\t" + val.toString()));
                 }
             }
         }
