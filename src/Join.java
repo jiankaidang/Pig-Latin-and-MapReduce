@@ -36,9 +36,6 @@ public class Join {
         FileInputFormat.addInputPaths(job, args[2] + "," + args[4]);
         FileOutputFormat.setOutputPath(job, new Path(args[6]));
 
-//        FileInputFormat.addInputPaths(job, args[1] + "," + args[3]);
-//        FileOutputFormat.setOutputPath(job, new Path(args[5]));
-
         job.waitForCompletion(true);
     }
 
