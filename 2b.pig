@@ -21,5 +21,4 @@ users_join_tweets = JOIN users BY login, tweets BY user;
 users_natural_join_tweets = foreach users_join_tweets generate .. content;
 
 -- Use the default Pig output function to store the results.
--- Output: (login, name, state, id, content)
-STORE users_natural_join_tweets INTO '2b.result' USING PigStorage (',');
+STORE users_natural_join_tweets INTO '2b.result';

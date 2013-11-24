@@ -16,5 +16,4 @@ users_in_NY = FILTER raw BY state eq 'NY';
 login_of_users_in_NY = FOREACH users_in_NY GENERATE login;
 
 -- Use the default Pig output function to store the results.
--- Output: (login)
 STORE login_of_users_in_NY INTO '1a.result';
