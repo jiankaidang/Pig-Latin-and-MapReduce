@@ -9,13 +9,15 @@
  *     	user_name, number_of_tweets
  */
 
+REGISTER piggybank.jar;
+
 -- Use the PigStorage function to load the user collection file into the raw bag as an array of records.
 -- Input: (login, name, state)
 users = LOAD 'users.csv' USING PigStorage(',') AS (login:chararray, name:chararray, state:chararray);
 
 -- Use the PigStorage function to load the tweets collection file into the raw bag as an array of records.
 -- Input: (id, content, user)
-tweets = LOAD 'tweets.csv' USING PigStorage(',') AS (id:long, content:chararray, user:chararray);
+tweets = LOAD 'tweets.csv' USING org.apache.pig.piggybank.storage.CSVExcelStorage() AS (id:long, content:chararray, user:chararray);
 
 -- Performs an outer join of two relations based on common field values.
 users_join_tweets = JOIN users BY login LEFT, tweets BY user;

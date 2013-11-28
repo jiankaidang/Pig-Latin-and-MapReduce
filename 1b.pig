@@ -5,9 +5,11 @@
  * Each line in the collection of tweets contains the tweet id, content, and a reference to the user who wrote that tweet.
  */
 
+REGISTER piggybank.jar;
+
 -- Use the PigStorage function to load the tweets collection file into the raw bag as an array of records.
 -- Input: (id, content, user)
-raw = LOAD 'tweets.csv' USING PigStorage(',') AS (id:long, content:chararray, user:chararray);
+raw = LOAD 'tweets.csv' USING org.apache.pig.piggybank.storage.CSVExcelStorage() AS (id:long, content:chararray, user:chararray);
 
 -- Use the FILTER command to remove all tweets with a content which does not include the word 'favorite'.
 tweets_include_favorite = FILTER raw BY (content matches '.*favorite.*');
